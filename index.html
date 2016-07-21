@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Wanderers - by Alan Johnson</title>
+<style>
+body {
+  position : absolute;
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  font-family: sans-serif;
+  text-align: center;
+  color: white;
+}
+
+main {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#start-button {
+  border: solid 2px white;
+  background: black;
+  color: white;
+  font-size: 18px;
+}
+
+</style>
+</head>
+<body>
+  <main>
+    <div id="centered-content">
+      <h1>Wanderers</h1>
+      <h2>an electronic composition by Alan Johnson</h2>
+      <audio id="audio" src="Alan Johnson - Wanderers.wav" preload="auto"></audio>
+      <button id="start-button" onclick="window.audioController.play();">Start</button>
+    </div>
+  </main>
+<script>
+window.audioController = (function controller() {
+  const audio = document.getElementById('audio');
+  const startButton = document.getElementById('start-button');
+
+  audio.addEventListener("ended", function ended() {
+    audio.currentTime = 0;
+    startButton.innerText = "Start";
+    startButton.blur();
+  }, true);
+
+  return {
+    play: function play() {
+      audio.currentTime = 0;
+      audio.play();
+      startButton.innerText = "Playing...";
+    },
+  };
+})();
+</script>
+</body>
+</html>
